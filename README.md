@@ -1,5 +1,6 @@
 # KTCareerQuestion
 Private test project to see how to use basics for DB (SQLite), Streams, Swing
+
 Could be choose as basic learning source for students.
 
 This project has some bugs to fix:
