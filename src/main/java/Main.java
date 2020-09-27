@@ -1,35 +1,45 @@
+import model.UserLoginInfo;
 import repositories.UserRepo;
 import services.DBreader;
 import services.DBwriter;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException, SQLException {
 
-        new DBwriter().writeNewUserLoginToDB();
-//        Scanner sc = new Scanner(System.in);
-//        String input = "";
-//        System.out.println("== WELCOME TO MYBANK ==");
-//        while (!input.equals("3")) {
-//            printMenuLogin();
-//            input = sc.next();
-//            switch (input) {
-//                case "1":
-//
-//                    break;
-//                case "2":
-//
-//                    break;
-//                case "3":
-//
-//                    break;
-//                default:
-//                    System.out.println("Wrong input!");
-//                    break;
-//            }
-//        }
+
+    public static void main(String[] args) throws IOException, SQLException {
+        DBreader dBreader=new DBreader();
+
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        System.out.println("== WELCOME TO MYBANK ==");
+        while (!input.equals("3")) {
+            printMenuLogin();
+            input = sc.next();
+            switch (input) {
+                case "1":
+                    System.out.println("Please enter your username");
+                    String username=sc.next();
+                    System.out.println("Please enter your password");
+                    String password=sc.next();
+                    if (dBreader.checkLoginInput(new UserLoginInfo(username, password))){
+
+                    }
+                    break;
+                case "2":
+
+                    break;
+                case "3":
+
+                    break;
+                default:
+                    System.out.println("Wrong input!");
+                    break;
+            }
+        }
     }
 
     public static void printMenuLogin() {
