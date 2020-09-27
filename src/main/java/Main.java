@@ -1,3 +1,4 @@
+import repositories.UserRepo;
 import services.DBreader;
 import services.DBwriter;
 
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
 
+        new DBwriter().writeNewUserLoginToDB();
 //        Scanner sc = new Scanner(System.in);
 //        String input = "";
 //        System.out.println("== WELCOME TO MYBANK ==");

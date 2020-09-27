@@ -5,7 +5,9 @@ public class MySQLqueries {
     public static final String USER_INFO_BY_ID="SELECT firstname, lastname, address, cellphone_number, email FROM mydb.user_info WHERE id= ?";
     //firstname, lastname, address, cellphone_number, email
 
-    public static final String USER_LOGIN="";
+    public static final String USER_LOGIN="SELECT username, password FROM mydb.user_login WHERE username=?, password=?";
+
+    public static final String USER_GET_LOGIN="SELECT username, password FROM mydb.user_login";
 
     public static final String USER_REGISTER_LOGIN="INSERT INTO mydb.user_login (username, password) VALUES (?, ?)";
 

@@ -1,6 +1,6 @@
 package model;
 
-public class User {
+public class UserInfo {
 
     private int id;
     private String firstname;
@@ -11,7 +11,7 @@ public class User {
 
 
 
-    public User(String firstname, String lastname, String address, long phoneNumber, String email) {
+    public UserInfo(String firstname, String lastname, String address, long phoneNumber, String email) {
         this.id=id;
         this.firstname = firstname;
         this.lastname = lastname;

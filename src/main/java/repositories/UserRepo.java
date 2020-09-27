@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,20 +19,17 @@ public class UserRepo {
     private ResultSet resultSet;
 
 
-    public List<UserLoginInfo> getAllUserLoginData() throws IOException, SQLException {
-        List<UserLoginInfo> userLoginInfoList=new ArrayList<>();
+    public HashMap<String, String> getAllUserLoginData() throws IOException, SQLException {
+        HashMap<String,String> userLoginInfoList=new HashMap<>();
         statement=Objects.requireNonNull(dBmanager.getConnectionn().createStatement());
         resultSet=statement.executeQuery(
                 MySQLqueries.USER_GET_LOGIN
         );
         while (resultSet.next()){
-            String username=resultSet.getString(1);
-            String password=resultSet.getString(2);
-            userLoginInfoList.add(new UserLoginInfo(username,password));
-        }
-        resultSet.close();
-        for (UserLoginInfo print: userLoginInfoList){
-            System.out.println(print.toString());
+            String username = resultSet.getString(1);
+            String password = resultSet.getString(2);
+            userLoginInfoList.put(username, password);
+
         }
         return userLoginInfoList;
     }
