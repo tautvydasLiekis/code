@@ -24,11 +24,12 @@ public class DBreader {
     public DBreader() throws IOException, SQLException {
     }
 
-    public void printUserInfoByID(int id) throws IOException, SQLException {
+    public void printUserAfterLogin(UserLoginInfo user) throws IOException, SQLException {
         preparedStatement = dBmanager.getConnectionn().prepareStatement(
-                MySQLqueries.USER_INFO_BY_ID
+                MySQLqueries.USER_INFO_BY_LOGIN
         );
-        preparedStatement.setInt(1, id);
+        preparedStatement.setString(1, user.getUsername());
+        preparedStatement.setString(2, user.getPassword());
         preparedStatement.executeQuery();
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -47,6 +48,7 @@ public class DBreader {
                             "Phone Number: " + phoneNumber + "\n" +
                             "Email address: " + email
             );
+            System.out.println("===============");
         }
         resultSet.close();
         preparedStatement.close();
