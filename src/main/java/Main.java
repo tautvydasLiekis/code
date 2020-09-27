@@ -1,13 +1,12 @@
 import services.DBreader;
+import services.DBwriter;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
 
-new DBreader().printUserInfo(1);
 //        Scanner sc = new Scanner(System.in);
 //        String input = "";
 //        System.out.println("== WELCOME TO MYBANK ==");
@@ -33,45 +32,32 @@ new DBreader().printUserInfo(1);
 
     public static void printMenuLogin() {
         System.out.println(
-                        "[1] Login" +
-                                "\n" +
-                        "[2] Register" +
-                                "\n" +
+                "[1] Login" + "\n" +
+                        "[2] Register" + "\n" +
                         "[3] EXIT"
         );
     }
 
     public static void printMenuAfterLoginDebit() {
         System.out.println(
-                        "[1] Account details" +
-                                "\n" +
-                        "[2] Check balance" +
-                                "\n" +
-                        "[3] Transfers & Payments" +
-                                "\n" +
-                        "[4] Deposit" +
-                                "\n" +
-                        "[5] Withdrawal" +
-                                "\n" +
-                        "[6] Save Transfers & Payments" +
-                                "\n" +
+                "[1] Account details" + "\n" +
+                        "[2] Check balance" + "\n" +
+                        "[3] Transfers & Payments" + "\n" +
+                        "[4] Deposit" + "\n" +
+                        "[5] Withdrawal" + "\n" +
+                        "[6] Save Transfers & Payments" + "\n" +
                         "[7] Log Off"
         );
     }
-    public static void printMenuAfterLoginCredit(){
+
+    public static void printMenuAfterLoginCredit() {
         System.out.println(
-                "[1] Account details" +
-                        "\n" +
-                        "[2] Check balance" +
-                        "\n" +
-                        "[3] Transfers & Payments" +
-                        "\n" +
-                        "[4] Deposit" +
-                        "\n" +
-                        "[5] Withdrawal" +
-                        "\n" +
-                        "[6] Save Transfers & Payments" +
-                        "\n" +
+                "[1] Account details" + "\n" +
+                        "[2] Check balance" + "\n" +
+                        "[3] Transfers & Payments" + "\n" +
+                        "[4] Deposit" + "\n" +
+                        "[5] Withdrawal" + "\n" +
+                        "[6] Save Transfers & Payments" + "\n" +
                         "[7] Log Off"
         );
     }

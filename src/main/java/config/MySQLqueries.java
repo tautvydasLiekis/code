@@ -7,7 +7,9 @@ public class MySQLqueries {
 
     public static final String USER_LOGIN="";
 
-    public static final String USER_REGISTER="";
+    public static final String USER_REGISTER_LOGIN="INSERT INTO mydb.user_login (username, password) VALUES (?, ?)";
+
+    public static final String USER_REGISTER_INFO="INSERT INTO mydb.user_info (firstname, lastname, address, cellphone_number, email) VALUES (?, ?, ?, ?, ?)";
 
     public static final String BALANCE_CHECK="";
 

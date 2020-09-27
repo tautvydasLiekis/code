@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Objects;
 
 public class DBreader {
 
@@ -21,7 +20,7 @@ public class DBreader {
     public DBreader() throws IOException, SQLException {
     }
 
-    public void printUserInfo(int id) throws IOException, SQLException {
+    public void printUserInfoByID(int id) throws IOException, SQLException {
         preparedStatement = dBmanager.getConnectionn().prepareStatement(
                 MySQLqueries.USER_INFO_BY_ID
         );
@@ -37,11 +36,13 @@ public class DBreader {
             String email = resultSet.getString("email");
 
             System.out.println("== USER INFO ==");
-            System.out.println("Name: "+firstname + "\n" +
+            System.out.println(
+                    "Name: "+firstname + "\n" +
                     "Surname: " +lastname + "\n" +
                     "Address: " + adress + "\n" +
                     "Phone Number: " +phoneNumber + "\n" +
-                    "Email address: " + email);
+                    "Email address: " + email
+            );
         }
         resultSet.close();
         preparedStatement.close();
