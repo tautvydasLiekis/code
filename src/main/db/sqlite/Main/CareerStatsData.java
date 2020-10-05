@@ -12,6 +12,8 @@ import main.enums.EnumTestAnswerType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
+
 
 public class CareerStatsData {
 	
@@ -29,7 +31,7 @@ public class CareerStatsData {
 		testType = cfg.configAnswerType;
 	}
 	
-	public void setQuestionAnswer(int ATrueAnswer, int AAnswer, int AAnswerRange) {
+	public void setQuestionAnswer(int ATrueAnswer, int AAnswer, int AAnswerRange) throws SQLException {
 		personStat.setPersonStat(sessionId, ATrueAnswer, AAnswer, AAnswerRange);
 	}
 	

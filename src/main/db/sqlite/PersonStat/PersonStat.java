@@ -1,9 +1,6 @@
 package main.db.sqlite.PersonStat;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 import javax.swing.JOptionPane;
 
@@ -37,24 +34,28 @@ public class PersonStat {
 		createConnection();
 	}
 
-	public boolean setPersonStat(int ASessionId, int ATrueAnswer, int AAnswer, int AAnswerRange) {
+	public boolean setPersonStat(int ASessionId, int ATrueAnswer, int AAnswer, int AAnswerRange) throws SQLException {
 		Connection conn = createConnection();
 	    Statement stmt = null;
 	    String sql;
-	    try {
-	    	stmt = conn.createStatement();
+		try {
+			stmt = conn.createStatement();
 			sql = String.format(
 	    		  "INSERT INTO t_person_stat (ps_person_id, ps_true_answer, ps_person_answer, ps_answer_range) " +
-	    				  "SELECT %d, %d, %d, %d;", ASessionId, ATrueAnswer, AAnswer, AAnswerRange); 
-			stmt.executeUpdate(sql);
+	    				  "SELECT %d, %d, %d, %d;", ASessionId, ATrueAnswer, AAnswer, AAnswerRange);
+			stmt.execute(sql);
 
 			stmt.close();
 			conn.commit();
-			conn.close();
 	    } catch ( Exception e ) {
+			if (conn!=null){
+				conn.rollback();
+			}
 	    	CreateException(e);
 	    	return false;
-	    }
+	    } finally {
+	    	conn.close();
+		}
 
 		return true;
 	}
