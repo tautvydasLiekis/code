@@ -16,37 +16,48 @@ public class DBwriter {
     private Scanner sc = new Scanner(System.in);
     private UserRepo userRepo = new UserRepo();
 
-    public void writeNewUserLoginToDB() throws IOException, SQLException {
-       try {
-           preparedStatement = dBmanager.mySQLconnection.prepareStatement(
-                   MySQLqueries.USER_REGISTER_LOGIN
-           );
-           dBmanager.mySQLconnection.setAutoCommit(false);
-           System.out.print("Enter username: ");
-           String username = sc.next();
-           if (!userRepo.getAllUserLoginData().containsKey(username)) {
-               preparedStatement.setString(1, username);
-               System.out.print("Enter password: ");
-               String password = sc.next();
-               preparedStatement.setString(2, password);
-               preparedStatement.executeUpdate();
-               dBmanager.mySQLconnection.commit();
-               preparedStatement.close();
-           } else {
-               System.out.println("ERROR: this username is already taken");
-           }
-       } catch (SQLException e){
-           dBmanager.mySQLconnection.rollback();
-       }
+
+    public void writeNewUserToDB() throws SQLException {
+        try {
+            dBmanager.mySQLconnection.setAutoCommit(false);
+            writeNewUserLoginToDB();
+            writeNewUserInfoToDB();
+            writeNewUserCardType();
+        } catch (SQLException e){
+            dBmanager.mySQLconnection.rollback();
+        }
     }
 
+    private void writeNewUserLoginToDB() throws SQLException {
+        try {
+            preparedStatement = dBmanager.mySQLconnection.prepareStatement(
+                    MySQLqueries.USER_REGISTER_LOGIN
+            );
+//            dBmanager.mySQLconnection.setAutoCommit(false);
+            System.out.print("Enter username: ");
+            String username = sc.next();
+            if (!userRepo.getAllUserLoginData().containsKey(username)) {
+                preparedStatement.setString(1, username);
+                System.out.print("Enter password: ");
+                String password = sc.next();
+                preparedStatement.setString(2, password);
+                preparedStatement.executeUpdate();
+//                dBmanager.mySQLconnection.commit();
+                preparedStatement.close();
+            } else {
+                System.out.println("ERROR: this username is already taken");
+            }
+        } catch (SQLException | IOException e) {
+//            dBmanager.mySQLconnection.rollback();
+        }
+    }
 
-    public void writeNewUserInfoToDB() throws IOException, SQLException {
+    private void writeNewUserInfoToDB() throws SQLException {
         try {
             preparedStatement = dBmanager.mySQLconnection.prepareStatement(
                     MySQLqueries.USER_REGISTER_INFO
             );
-            dBmanager.mySQLconnection.setAutoCommit(false);
+//            dBmanager.mySQLconnection.setAutoCommit(false);
             System.out.print("Enter your name: ");
             String firstname = sc.next();
             preparedStatement.setString(1, firstname);
@@ -63,25 +74,46 @@ public class DBwriter {
             String email = sc.next();
             preparedStatement.setString(5, email);
             preparedStatement.executeUpdate();
-            dBmanager.mySQLconnection.commit();
+//            dBmanager.mySQLconnection.commit();
             preparedStatement.close();
         } catch (SQLException e) {
-            dBmanager.mySQLconnection.rollback();
+//            dBmanager.mySQLconnection.rollback();
         }
     }
+
+    private void writeNewUserCardType() throws SQLException {
+        try {
+            preparedStatement = dBmanager.mySQLconnection.prepareStatement(
+                    MySQLqueries.USER_REGISTER_CARD_TYPE
+            );
+//            dBmanager.mySQLconnection.setAutoCommit(false);
+            System.out.println("[0] Debit" + "\n" + "[1] Credit");
+            System.out.print("Enter which card type do you want: ");
+            byte cardType = sc.nextByte();
+            preparedStatement.setByte(1, cardType);
+//            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+//            dBmanager.mySQLconnection.rollback();
+        }
+    }
+
     public void writeNewUserBalance() throws SQLException {
         try {
             preparedStatement = dBmanager.mySQLconnection.prepareStatement(
                     MySQLqueries.BALANCE_ADD_TO_ACCOUNT
             );
             dBmanager.mySQLconnection.setAutoCommit(false);
-            preparedStatement.setLong(1, 0);
-            preparedStatement.setLong(2, 0);
+            preparedStatement.setInt(1, 20);
             preparedStatement.executeUpdate();
             dBmanager.mySQLconnection.commit();
             preparedStatement.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             dBmanager.mySQLconnection.rollback();
         }
+    }
+
+    public void newTransaction() {
+
     }
 }

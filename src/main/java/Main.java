@@ -15,10 +15,10 @@ public class Main {
         DBwriter dBwriter = new DBwriter();
         DBreader dBreader = new DBreader();
         Scanner sc = new Scanner(System.in);
-        String input = "";
-        String input2 = "";
+        String input="";
+        String input2="";
         System.out.println("== WELCOME TO MYBANK ==");
-        while (!input.equals("3")) {
+        inputLoop: while (true) {
             printMenuLogin();
             input = sc.next();
             switch (input) {
@@ -28,7 +28,7 @@ public class Main {
                     System.out.print("Please enter your password: ");
                     String password = sc.next();
                     if (dBreader.checkLoginInput(new UserLoginInfo(username, password))) {
-                        while (!input2.equals("7")) {
+                       input2Loop: while (true) {
                             printMenuAfterLogin();
                             input2 = sc.next();
                             switch (input2) {
@@ -51,8 +51,7 @@ public class Main {
 
                                     break;
                                 case "7":
-
-                                    break;
+                                    break input2Loop;
                                 default:
                                     System.out.println("Wrong input");
                                     break;
@@ -61,10 +60,10 @@ public class Main {
                     }
                     break;
                 case "2":
-                    dBwriter.writeNewUserInfoToDB();
+                    dBwriter.writeNewUserToDB();
                     break;
                 case "3":
-                    break;
+                    break inputLoop;
                 default:
                     System.out.println("Wrong input!");
                     break;

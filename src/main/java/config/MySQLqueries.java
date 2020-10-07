@@ -2,18 +2,30 @@ package config;
 
 public class MySQLqueries {
 
-    public static final String USER_INFO_GET="SELECT firstname, lastname, address, cellphone_number, email FROM mydb.user_info";
+    public static final String USER_INFO_GET="SELECT name, lastname, address, phone_number, email FROM my_bank.user_info";
 
-    public static final String USER_INFO_BY_LOGIN="select mydb.user_info.firstname, mydb.user_info.lastname, mydb.user_info.address, mydb.user_info.cellphone_number, mydb.user_info.email from mydb.user_info inner join mydb.user_login on mydb.user_info.id = mydb.user_login.id \n" +
-            "where (mydb.user_login.username=? and mydb.user_login.password=?)";
+    //Pataisyti
+    public static final String USER_INFO_BY_LOGIN="SELECT my_bank.user_info.name, my_bank.user_info.lastname, my_bank.user_info.address, my_bank.user_info.phone_number, my_bank.user_info.email " +
+            "From (( user_account " +
+            "INNER JOIN " +
+            "user_info ON user_account.user_Info_id = user_info.id) " +
+            "INNER JOIN " +
+            "user_login ON user_account.user_Login_id = user_login.id) " +
+            "WHERE (user_login.username = ? and user_login.password = ?)";
 
-    public static final String USER_GET_LOGIN="SELECT username, password FROM mydb.user_login";
+    public static final String USER_GET_LOGIN="SELECT username, password FROM my_bank.user_login";
 
-    public static final String USER_REGISTER_LOGIN="INSERT INTO mydb.user_login (username, password) VALUES (?, ?)";
+    public static final String USER_REGISTER_LOGIN="INSERT INTO my_bank.user_login " +
+            "(username, password) VALUES (?, ?)";
 
-    public static final String USER_REGISTER_INFO="INSERT INTO mydb.user_info (firstname, lastname, address, cellphone_number, email) VALUES (?, ?, ?, ?, ?)";
+    public static final String USER_REGISTER_INFO="INSERT INTO my_bank.user_info " +
+            "(name, lastname, address, phone_number, email) VALUES (?, ?, ?, ?, ?)";
 
-    public static final String BALANCE_ADD_TO_ACCOUNT="INSERT INTO mydb.user_account (balance, account_type) VALUES (?, ?)";
+    public static final String USER_REGISTER_CARD_TYPE="insert into my_bank.account_type " +
+            "(type) values (?);";
+
+    public static final String BALANCE_ADD_TO_ACCOUNT="insert into my_bank.user_account " +
+            "(balance, user_Login_id, user_Info_id, account_type_id) value (0, ?, ?, ?);";
 
     public static final String BALANCE_CHECK="";
 

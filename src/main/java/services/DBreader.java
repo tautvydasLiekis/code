@@ -34,10 +34,10 @@ public class DBreader {
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
 
-            String firstname = resultSet.getString("firstname");
+            String firstname = resultSet.getString("name");
             String lastname = resultSet.getString("lastname");
             String adress = resultSet.getString("address");
-            long phoneNumber = resultSet.getLong("cellphone_number");
+            long phoneNumber = resultSet.getLong("phone_number");
             String email = resultSet.getString("email");
 
             System.out.println("== USER INFO ==");
