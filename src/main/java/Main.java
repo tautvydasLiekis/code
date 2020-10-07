@@ -1,5 +1,6 @@
 import model.UserLoginInfo;
 import repositories.DBmanager;
+import repositories.UserRepo;
 import services.DBreader;
 import services.DBwriter;
 
@@ -11,14 +12,23 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException, SQLException {
+
         DBmanager dBmanager = new DBmanager();
         DBwriter dBwriter = new DBwriter();
         DBreader dBreader = new DBreader();
+        UserRepo userRepo=new UserRepo();
+
         Scanner sc = new Scanner(System.in);
+
         String input="";
         String input2="";
-        System.out.println("== WELCOME TO MYBANK ==");
+
+        System.out.println("---------------------------");
+        System.out.println("|    WELCOME TO MYBANK    |");
+        System.out.println("---------------------------");
+
         inputLoop: while (true) {
+
             printMenuLogin();
             input = sc.next();
             switch (input) {
@@ -60,7 +70,7 @@ public class Main {
                     }
                     break;
                 case "2":
-                    dBwriter.writeNewUserToDB();
+                    dBwriter.writeNewUsertoDBbatch();
                     break;
                 case "3":
                     break inputLoop;

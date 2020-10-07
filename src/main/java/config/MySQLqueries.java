@@ -4,7 +4,6 @@ public class MySQLqueries {
 
     public static final String USER_INFO_GET="SELECT name, lastname, address, phone_number, email FROM my_bank.user_info";
 
-    //Pataisyti
     public static final String USER_INFO_BY_LOGIN="SELECT my_bank.user_info.name, my_bank.user_info.lastname, my_bank.user_info.address, my_bank.user_info.phone_number, my_bank.user_info.email " +
             "From (( user_account " +
             "INNER JOIN " +
@@ -14,6 +13,8 @@ public class MySQLqueries {
             "WHERE (user_login.username = ? and user_login.password = ?)";
 
     public static final String USER_GET_LOGIN="SELECT username, password FROM my_bank.user_login";
+
+    public static final String USER_GET_LOGIN_ID="SELECT id FROM my_bank.user_login";
 
     public static final String USER_REGISTER_LOGIN="INSERT INTO my_bank.user_login " +
             "(username, password) VALUES (?, ?)";
@@ -25,7 +26,7 @@ public class MySQLqueries {
             "(type) values (?);";
 
     public static final String BALANCE_ADD_TO_ACCOUNT="insert into my_bank.user_account " +
-            "(balance, user_Login_id, user_Info_id, account_type_id) value (0, ?, ?, ?);";
+            "(balance, user_Login_id, user_Info_id, account_type_id) values (0, ?, ?, ?);";
 
     public static final String BALANCE_CHECK="";
 

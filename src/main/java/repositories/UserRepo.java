@@ -50,4 +50,17 @@ public class UserRepo {
         }
         return userInfoList;
     }
+
+    public List<Integer> getAllUserLoginID() throws IOException, SQLException {
+        List<Integer> idList=new ArrayList<>();
+        statement = Objects.requireNonNull(dBmanager.getConnectionn().createStatement());
+        resultSet = statement.executeQuery(
+          MySQLqueries.USER_GET_LOGIN_ID
+        );
+        while (resultSet.next()) {
+            int id= resultSet.getInt(1);
+            idList.add(id);
+        }
+        return idList;
+    }
 }
